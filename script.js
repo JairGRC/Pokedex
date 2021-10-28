@@ -141,8 +141,8 @@ function AgregarModalContenido(pokemon){
     for(const poderes in pokemon.stats){
         valor=Number.parseFloat(`${pokemon.stats[poderes].base_stat}`)/2
         contenidoH=contenidoH+`
-        <div class="progress">
-            <div class="col-2"><p>${pokemon.stats[poderes].stat.name}</p></div>
+        <div class="progress m-1">
+            <div class="col-2 "><p>${pokemon.stats[poderes].stat.name}</p></div>
             <div class="col-10">
             <div class="progress-bar bg-success" role="progressbar" style="width: ${valor}%"  aria-valuemin="0" aria-valuemax="100">${pokemon.stats[poderes].base_stat}</div>
             </div>
