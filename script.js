@@ -114,13 +114,14 @@ const MostrarPokemon=(pokemon)=>{
     const estadistica=document.querySelector(".agregarContenido")
     estadistica.innerText=""
     let contenidoH=``
-    
+    let valor=0
     for(const poderes in pokemon.stats){
+        valor=Number.parseFloat(`${pokemon.stats[poderes].base_stat}`)/2
         contenidoH=contenidoH+`
         <div class="progress">
             <div class="col-2"><p>${pokemon.stats[poderes].stat.name}</p></div>
             <div class="col-10">
-            <div class="progress-bar bg-success" role="progressbar" style="width: ${pokemon.stats[poderes].base_stat}%"  aria-valuemin="0" aria-valuemax="100">${pokemon.stats[poderes].base_stat}</div>
+            <div class="progress-bar bg-success" role="progressbar" style="width: ${valor}%"  aria-valuemin="0" aria-valuemax="100">${pokemon.stats[poderes].base_stat}</div>
             </div>
         </div>`
     }
