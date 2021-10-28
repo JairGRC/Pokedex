@@ -1,5 +1,25 @@
 const pokemonContainer=document.querySelector(".row.row-cols-2.row-cols-md-4.row-cols-sm-3.row-cols-lg-5.row-cols-xl-6.g-3")
 const spinner=document.querySelector("#spinner")
+const previous=document.querySelector("#previous")
+const next=document.querySelector("#next")
+
+let offset=1;
+let limite=17
+
+previous.addEventListener('click',()=>{
+    if(offset!=1){
+        offset -=18
+        removeChildNodes(pokemonContainer)
+        fetchPokemones(offset,limite)
+    }
+})
+
+
+next.addEventListener('click',()=>{
+    offset +=18
+    removeChildNodes(pokemonContainer)
+    fetchPokemones(offset,limite)
+})
 
 function fethcPokemon(id){
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
@@ -33,9 +53,9 @@ function getFethcPokemon(id){
         )
         .catch(error =>PokemonNoEncontrado());
 }
-function fetchPokemones(number){
+function fetchPokemones(offset,limite){
     spinner.style.display="block"
-    for(let i=1;i<=number;i++){
+    for(let i=offset;i<=offset+limite;i++){
         fethcPokemon(i)
     }
 }
@@ -99,10 +119,14 @@ const MostrarPokemon=(pokemon)=>{
     const cabezaModal=document.querySelector("#TituloModal")
     cabezaModal.textContent=`${pokemon.name.toUpperCase()}`
 
-    
     const imagenModal=document.querySelector("#logoImagen")
     imagenModal.src=pokemon.sprites.front_default
 
+    AgregarModalContenido(pokemon)
+
+}
+
+function AgregarModalContenido(pokemon){
     const tituloCard=document.getElementById("#numeroTitulo")
     let habilidades= " "
     for(const tipoPokemon in pokemon.types){
@@ -110,7 +134,6 @@ const MostrarPokemon=(pokemon)=>{
     }
     habilidades= "Tipo: "+habilidades+ "\t"+"   N°"+ `#${pokemon.id.toString().padStart(3,0)}`
     tituloCard.textContent=habilidades
-   
     const estadistica=document.querySelector(".agregarContenido")
     estadistica.innerText=""
     let contenidoH=``
@@ -126,30 +149,6 @@ const MostrarPokemon=(pokemon)=>{
         </div>`
     }
     estadistica.insertAdjacentHTML('beforeend',contenidoH)
-    console.log(contenidoH)
-    
-
-    
-   /*  const cuerpoModal=document.querySelector("#cuerpoModal")
-
-    const imagenMostrar=document.querySelector("#imagenH")
-    const imgInsert=document.createElement("img")
-    imgInsert.style.width="140px"
-    imgInsert.src=pokemon.sprites.front_default
-
-    imagenMostrar.appendChild(imgInsert)
-
-    const numeroPok=document.querySelector(".detail-national-id")
-    const agregarNumero=document.createElement("span")
-    agregarNumero.textContent=`#${pokemon.id.toString().padStart(3,0)}`
-
-    numeroPok.appendChild(agregarNumero)
-    
-    for(const tipoPokemon in pokemon.types){
-        console.log(`${pokemon.types[tipoPokemon].type.name}`)
-    }
-     */
-    
 }
 
 const filtrar=()=>{
@@ -164,9 +163,7 @@ const filtrar=()=>{
     
 }
 
-const viewModal=()=>{
-    console.log("ctmr")
-}
+
 function PokemonNoEncontrado(){
     const noencontrado= document.createElement("div")
     noencontrado.classList.add("alert","alert-primary")
@@ -178,10 +175,12 @@ buscador.addEventListener('search',filtrar)
 
 
 function Init(){
-    fetchPokemones(150)
+    fetchPokemones(offset,limite)
 }
 Init()
 
-function eliminar(){
-    myModal.dispose()
+function removeChildNodes(parent){
+    while(parent.firstChild){
+        parent.removeChild(parent.firstChild)
+    }
 }

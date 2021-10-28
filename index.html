@@ -26,11 +26,30 @@
         <div class="row row-cols-2 row-cols-md-4 row-cols-sm-3 row-cols-lg-5 row-cols-xl-6 g-3">
 
         </div>
+        <br>
+        <div id="spinner" class="spinner-grow text-light" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+        <nav class="pagination">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a id="previous"class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+                <li class="page-item">
+                    <a id="next" class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+    </div>
 
-    </div>
-    <div id="spinner" class="spinner-grow text-light" role="status">
-        <span class="visually-hidden">Loading...</span>
-    </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
         <div class="modal-dialog">
@@ -42,27 +61,30 @@
                 <div class="modal-body" id="cuerpoModal">
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
-                            <div class="col-md-4" >
-                                <img  class="img-fluid rounded-start" id="logoImagen" width="100%" alt="...">
+                            <div class="col-md-4">
+                                <img class="img-fluid rounded-start" id="logoImagen" width="100%" alt="...">
                             </div>
                             <div class="col-md-8">
                                 <h5 class="card-title " id="#numeroTitulo"></h5>
-                                <div class="card-body agregarContenido" >
-                            
-                                    <p  class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                <div class="card-body agregarContenido">
+
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                                 </div>
                             </div>
                         </div>
 
-                        
+
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+
+
+
     <script src="./script.js"></script>
 </body>
 
