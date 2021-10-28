@@ -90,7 +90,6 @@ function crearPokemon(pokemon){
 const buscador=document.querySelector("#buscador")
 
 const showAlert=(event)=> {
-    console.log(event)
     getFethcPokemon(event)
     
     
@@ -98,7 +97,58 @@ const showAlert=(event)=> {
 
 const MostrarPokemon=(pokemon)=>{
     const cabezaModal=document.querySelector("#TituloModal")
-    cabezaModal.textContent=`${pokemon.name}`
+    cabezaModal.textContent=`${pokemon.name.toUpperCase()}`
+
+    
+    const imagenModal=document.querySelector("#logoImagen")
+    imagenModal.src=pokemon.sprites.front_default
+
+    const tituloCard=document.getElementById("#numeroTitulo")
+    let habilidades= " "
+    for(const tipoPokemon in pokemon.types){
+        habilidades= habilidades+`  ${pokemon.types[tipoPokemon].type.name}`
+    }
+    habilidades= "Tipo: "+habilidades+ "\t"+"   N°"+ `#${pokemon.id.toString().padStart(3,0)}`
+    tituloCard.textContent=habilidades
+   
+    const estadistica=document.querySelector(".agregarContenido")
+    estadistica.innerText=""
+    let contenidoH=``
+    
+    for(const poderes in pokemon.stats){
+        contenidoH=contenidoH+`
+        <div class="progress">
+            <div class="col-2"><p>${pokemon.stats[poderes].stat.name}</p></div>
+            <div class="col-10">
+            <div class="progress-bar bg-success" role="progressbar" style="width: ${pokemon.stats[poderes].base_stat}%"  aria-valuemin="0" aria-valuemax="100">${pokemon.stats[poderes].base_stat}</div>
+            </div>
+        </div>`
+    }
+    estadistica.insertAdjacentHTML('beforeend',contenidoH)
+    console.log(contenidoH)
+    
+
+    
+   /*  const cuerpoModal=document.querySelector("#cuerpoModal")
+
+    const imagenMostrar=document.querySelector("#imagenH")
+    const imgInsert=document.createElement("img")
+    imgInsert.style.width="140px"
+    imgInsert.src=pokemon.sprites.front_default
+
+    imagenMostrar.appendChild(imgInsert)
+
+    const numeroPok=document.querySelector(".detail-national-id")
+    const agregarNumero=document.createElement("span")
+    agregarNumero.textContent=`#${pokemon.id.toString().padStart(3,0)}`
+
+    numeroPok.appendChild(agregarNumero)
+    
+    for(const tipoPokemon in pokemon.types){
+        console.log(`${pokemon.types[tipoPokemon].type.name}`)
+    }
+     */
+    
 }
 
 const filtrar=()=>{
@@ -125,7 +175,12 @@ function PokemonNoEncontrado(){
 }
 buscador.addEventListener('search',filtrar)
 
+
 function Init(){
-    fetchPokemones(4)
+    fetchPokemones(150)
 }
 Init()
+
+function eliminar(){
+    myModal.dispose()
+}
